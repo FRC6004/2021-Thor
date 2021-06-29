@@ -11,6 +11,13 @@ import frc.robot.OI;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -36,6 +43,9 @@ public class DriveTrain extends Subsystem {
       _rightMaster.configFactoryDefault();
       _leftFollow.configFactoryDefault();
       _rightFollow.configFactoryDefault();
+
+      _leftMaster.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
+      _rightMaster.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
       
       _leftFollow.follow(_leftMaster);
       _rightFollow.follow(_rightMaster);
@@ -55,7 +65,41 @@ public class DriveTrain extends Subsystem {
 
        setDefaultCommand(new ArcadeDrive());
     }
-  
+    public void drive(double leftPower, double rightPower) {
+      _leftMaster.set(ControlMode.PercentOutput, leftPower);
+      _leftFollow.set(ControlMode.PercentOutput, leftPower);
+      _rightMaster.set(ControlMode.PercentOutput, rightPower);
+      _rightFollow.set(ControlMode.PercentOutput, rightPower);
+  }
+
+  public void stopDrive() {
+      _leftMaster.set(ControlMode.PercentOutput, 0);
+      _leftFollow.set(ControlMode.PercentOutput, 0);
+      _rightMaster.set(ControlMode.PercentOutput, 0);
+      _rightFollow.set(ControlMode.PercentOutput, 0);
+  }
+
+  public double getLeftEncoder() {
+      return (_leftMaster.getSelectedSensorPosition() * RobotMap.DISTANCE_PER_PULSE);
+  }
+
+  public double getRightEncoder() {
+      return (_rightMaster.getSelectedSensorPosition() * RobotMap.DISTANCE_PER_PULSE);
+  }
+
+  public double getAverageEncoder() {
+      return (getLeftEncoder() + getRightEncoder()) / 2;
+  }
+
+  public void resetEncoder() {
+      _leftMaster.setSelectedSensorPosition(0);
+      _rightMaster.setSelectedSensorPosition(0);
+  }
+
+  public void driveWithMinPower(double leftPower, double rightPower, double minAbsolutePower) {
+      double realLeftPower = (leftPower / Math.abs(leftPower)) * Math.max(Math.abs(leftPower), minAbsolutePower);
+      double realRightPower = (rightPower / Math.abs(rightPower)) * Math.max(Math.abs(rightPower), minAbsolutePower);
+  }
 
 
       public void arcadeDrive(double speed, double turn, Boolean flip){
@@ -63,5 +107,24 @@ public class DriveTrain extends Subsystem {
 
         _drive.arcadeDrive(-speed, turn);
       }
-        
+      @Override
+      public void periodic() {
+  
+          // System.out.println("drivetrain periodic");
+  
+          NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+          NetworkTableEntry tx = table.getEntry("tx");
+          NetworkTableEntry ty = table.getEntry("ty");
+          NetworkTableEntry ta = table.getEntry("ta");
+  
+  //read values periodically
+          double x = tx.getDouble(0.0);
+          double y = ty.getDouble(0.0);
+          double area = ta.getDouble(0.0);
+  
+  //post to smart dashboard periodically
+          SmartDashboard.putNumber("LimelightX", x);
+          SmartDashboard.putNumber("LimelightY", y);
+          SmartDashboard.putNumber("LimelightArea", area);
+      }
   }

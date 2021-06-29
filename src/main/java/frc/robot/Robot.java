@@ -43,8 +43,8 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.robot.utils.Limelight;
 
-import edu.wpi.first.wpilibj.RobotController;
 
 
 /**
@@ -74,8 +74,6 @@ public class Robot extends TimedRobot {
   public static FixedDriveStop fixedDriveStopCmd;
 
 
-  public NetworkTableEntry yaw;
-  public NetworkTableEntry isDriverMode;
   private long initTime;
 
   /*----------------------------------
@@ -118,18 +116,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
     System.out.println("robotinit");
 
-     // Gets the default instance of NetworkTables
-     NetworkTableInstance table = NetworkTableInstance.getDefault();
 
-     // Gets the MyCamName table under the chamelon-vision table
-     // MyCamName will vary depending on the name of your camera
-     NetworkTable cameraTable = table.getTable("chameleon-vision").getSubTable("MyCamName");
-
-     // Gets the yaw to the target from the cameraTable
-     yaw = cameraTable.getEntry("yaw");
-
-     // Gets the driveMode boolean from the cameraTable
-     isDriverMode = cameraTable.getEntry("driver_mode");
 
      // PWM port 9
     // Must be a PWM header, not MXP or DIO
@@ -173,6 +160,40 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    // SmartDashboard.putString("i'm working", "ok");
+    // Runs the Scheduler. This is responsible for polling buttons, adding
+    // newly-scheduled
+    // commands, running already-scheduled commands, removing finished or
+    // interrupted commands,
+    // and running subsystem periodic() methods. This must be called from the
+    // robot's periodic
+    // block in order for anything in the Command-based framework to work.
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
+    NetworkTableEntry tlong = table.getEntry("tlong");
+
+//read values periodically
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+    double schlong = tlong.getDouble(0.0);
+
+//post to smart dashboard periodically
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+
+    SmartDashboard.putNumber("schlong", schlong);
+
+    SmartDashboard.putNumber("distance", Limelight.getDistance());
+
+    SmartDashboard.putNumber("hor distance", Limelight.getHorDistance());
+
+
+
+
     // Fill the buffer with a rainbow
     //rainbow();
     // Set the LEDs
@@ -263,8 +284,9 @@ public class Robot extends TimedRobot {
       }
     });
     */
-    // Sets driver mode to true if the A button is pressed
-    isDriverMode.setBoolean(m_oi._operator.getRawButton(1));
+
+
+
    
 
   }

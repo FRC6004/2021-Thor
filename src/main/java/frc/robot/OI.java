@@ -59,10 +59,14 @@ public class OI {
     ShootF.whileHeld(new ShooterButton(-.75));
 
     IntakeIn.whileHeld(new IndexCmd(.75));
-    intakeInDriver.whileHeld(new IntakeCmd(1));
+    intakeInDriver.whileHeld(new IndexCmd(0.75));
+    IntakeIn.whileHeld(new IntakeCmd(.75));
+    intakeInDriver.whileHeld(new IntakeCmd(0.75));
 
     IntakeOut.whileHeld(new IndexCmd(-.75));
     intakeOutDriver.whileHeld(new IndexCmd(-.75));
+    IntakeOut.whileHeld(new IntakeCmd(-.75));
+    intakeOutDriver.whileHeld(new IntakeCmd(-.75));
     IntakeOut.whileHeld(new ShooterButton(.1));
     intakeOutDriver.whileHeld(new ShooterButton(.1));
 
