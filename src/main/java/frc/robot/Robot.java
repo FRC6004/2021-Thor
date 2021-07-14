@@ -46,8 +46,7 @@ public class Robot extends TimedRobot {
 
   public static ArcadeDrive arcadeCmd;
 
-  public static FixedDrive fixedDriveCmd;
-  public static FixedDriveStop fixedDriveStopCmd;
+
 
   /*----------------------------------
   EXAMPLE SUBSYTEM SETUP

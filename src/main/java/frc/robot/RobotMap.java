@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -64,6 +65,9 @@ public class RobotMap {
   public static final double KNOWN_TAPE_BOUND_WIDTH = 39.25; //inches
   public static final double FOCAL_LENGTH = ( KNOWN_DISTANCE * PIXEL_WIDTH_KNOWN) / KNOWN_TAPE_BOUND_WIDTH;
   public static final double GEAR_RATIO = 10.7/1.0;
+  public static final double CAMERA_HEIGHT = 24; // Needs tuning
+  public static final double TARGET_HEIGHT = 98.25; // Height of inner port
+  public static final double DELTA_HEIGHT = TARGET_HEIGHT - CAMERA_HEIGHT;
 
   public static final double kTurnP = 1;
   public static final double kTurnI = 0;

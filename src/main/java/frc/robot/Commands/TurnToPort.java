@@ -49,6 +49,8 @@ public class TurnToPort extends Command {
     double area = ta.getDouble(0.0);
     double schlong = tlong.getDouble(0.0);
 
+    double Target_Distnace = (RobotMap.DELTA_HEIGHT) /(Math.tan(y)*(Math.cos(x)));
+
     double forward = 0;
     double turn = 0;
 
