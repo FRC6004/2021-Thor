@@ -68,7 +68,7 @@ public class RobotMap {
   public static final double kTurnP = 1;
   public static final double kTurnI = 0;
   public static final double kTurnD = 0;
-  public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048; //inches
+  public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 4096; //inches
 
   //trajectory constants
   public static final int SHOOTER_HEIGHT = 22; // inches change later

@@ -52,9 +52,18 @@ public class TurnToPort extends Command {
 
     double forward = 0;
     double turn = 0;
-  
-    turn = RobotMap.kTurnP*(x/10);
-        
+    // IF THE BELOW TRY/CATCH BLOCK DOESN'T WORK, 
+    // TRY SETTING THE TURN DECLARATION TO .5 AND SEEING IF IT WORKS
+    
+    try {
+      turn = RobotMap.kTurnP * (x/10); 
+      // RobotMap.kTurnP is 1
+      System.out.println("SUCCEED");
+      System.out.println("x is " + x);
+      System.out.println("Turn is " + turn);
+    } catch (Exception e) {
+      System.out.println("FAILED");
+    } 
     
 
     Robot.driveSub.arcadeDrive(forward, turn, false);

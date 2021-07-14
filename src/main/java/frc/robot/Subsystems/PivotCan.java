@@ -3,6 +3,7 @@
 package frc.robot.Subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -35,6 +36,8 @@ public class PivotCan extends Subsystem {
         // Update motor speed to passed in value
         //System.out.println("pivot");
        // System.out.println(motorSpeed);
+
+        CANSparkMax.setIdleMode(IdleMode.kBrake);
         CANSparkMax.set(motorSpeed);
 
         //System.out.print();

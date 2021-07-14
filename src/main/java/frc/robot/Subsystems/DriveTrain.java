@@ -91,6 +91,18 @@ public class DriveTrain extends Subsystem {
       return (getLeftEncoder() + getRightEncoder()) / 2;
   }
 
+  public double getLeftVelocity(){
+      return (_leftMaster.getSelectedSensorVelocity() * RobotMap.DISTANCE_PER_PULSE);
+  }
+
+  public double getRightVelocity(){
+    return (_rightMaster.getSelectedSensorVelocity() * RobotMap.DISTANCE_PER_PULSE);
+}
+
+public double getAverageVelocity(){
+    return (getRightVelocity() + getLeftVelocity()) / 2;
+}
+
   public void resetEncoder() {
       _leftMaster.setSelectedSensorPosition(0);
       _rightMaster.setSelectedSensorPosition(0);
