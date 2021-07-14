@@ -4,7 +4,6 @@ package frc.robot.utils;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.RobotMap;
-import org.opencv.core.Mat;
 
 public class Limelight {
     private static NetworkTableInstance table = null;

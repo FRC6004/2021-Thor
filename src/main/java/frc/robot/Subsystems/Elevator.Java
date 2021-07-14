@@ -10,7 +10,10 @@ package frc.robot.Subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PWMSparkMax;
+
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.RobotMap;
 import frc.robot.Commands.*;
@@ -19,28 +22,35 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class Pivot extends Subsystem {
+public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-      PWMSparkMax PivotSparkMax = new PWMSparkMax(RobotMap.PIVOT);
+      WPI_VictorSPX VictorSPX = new WPI_VictorSPX(RobotMap.ELEVATOR_LEFT);
+      WPI_VictorSPX VictorSPX2 = new WPI_VictorSPX(RobotMap.ELEVATOR_RIGHT);
+      
+
+      public Elevator(){
+
+      }
+
 
     @Override
     public void initDefaultCommand() {
       // Set the default command for a subsystem here.
-       setDefaultCommand(new PivotCmd(0));
+       setDefaultCommand(new ElevatorCmd(0));
     }
   
   
       public void update(double motorSpeed) {
         // Update motor speed to passed in value
-        //System.out.println("pivot");
-        System.out.println(motorSpeed);
-        PivotSparkMax.setSpeed(motorSpeed);
+        VictorSPX.setNeutralMode(NeutralMode.Brake);
+        VictorSPX2.setNeutralMode(NeutralMode.Brake);
 
+        VictorSPX.set(-motorSpeed);
+        VictorSPX2.set(motorSpeed);
         //System.out.print();
       }
       
       
   }
 
-hee hee hoo hoo funnyyyyyy

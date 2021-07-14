@@ -8,17 +8,12 @@
 
 package frc.robot.Subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DriverStation;
-
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import frc.robot.RobotMap;
 import frc.robot.Commands.*;
 
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.

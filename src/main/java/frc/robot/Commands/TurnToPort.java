@@ -10,11 +10,10 @@ import frc.robot.OI;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.utils.Limelight;
+
 
 /**
  * An example command.  You can replace me with your own command.
@@ -52,19 +51,9 @@ public class TurnToPort extends Command {
 
     double forward = 0;
     double turn = 0;
-    // IF THE BELOW TRY/CATCH BLOCK DOESN'T WORK, 
-    // TRY SETTING THE TURN DECLARATION TO .5 AND SEEING IF IT WORKS
-    
-    try {
+
       turn = RobotMap.kTurnP * (x/10); 
-      // RobotMap.kTurnP is 1
-      System.out.println("SUCCEED");
-      System.out.println("x is " + x);
-      System.out.println("Turn is " + turn);
-    } catch (Exception e) {
-      System.out.println("FAILED");
-    } 
-    
+
 
     Robot.driveSub.arcadeDrive(forward, turn, false);
    // if(reverse == false){

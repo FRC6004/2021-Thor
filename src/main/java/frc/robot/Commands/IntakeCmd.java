@@ -7,7 +7,6 @@
 
 package frc.robot.Commands;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -58,18 +57,6 @@ public class IntakeCmd extends Command {
 
 
   //implement PID loop here
-
-  protected void pid() {
-    double p = 0;
-    double i = 0;
-    double d = 0;
-    double iz = 0;
-    double ff = 0;
-    double max = 0;
-    double min = 0;
-    double rotations = 0;
-
-  }
 
   @Override
   protected void interrupted() {

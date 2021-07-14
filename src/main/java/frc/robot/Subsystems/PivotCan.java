@@ -1,21 +1,13 @@
 
-
 package frc.robot.Subsystems;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.Compressor;
-
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DriverStation;
-
-import frc.robot.RobotMap;
 import frc.robot.Commands.*;
 
-import edu.wpi.first.wpilibj.Timer;
 
 public class PivotCan extends Subsystem {
     /**
